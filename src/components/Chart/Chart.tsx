@@ -84,9 +84,20 @@ const Chart = ({ data, title }: ChartProps) => {
     data.forEach((dataPoint: { value: number; timePosted: Date }) => {
         // Get the date and/or time of the data, add to labelsData
         const dataTime = new Date(dataPoint.timePosted);
+        let hourString, minuteString;
+        if (dataTime.getHours() < 10) {
+            hourString = "0" + dataTime.getHours();
+        } else {
+            hourString = dataTime.getHours();
+        }
+        if (dataTime.getMinutes() < 10) {
+            minuteString = "0" + dataTime.getMinutes();
+        } else {
+            minuteString = dataTime.getMinutes();
+        }
         const label = `${dataTime.getDate()}/${
             dataTime.getMonth() + 1
-        }/${dataTime.getFullYear()} ${dataTime.getHours()}:${dataTime.getMinutes()}`;
+        }/${dataTime.getFullYear()} ${hourString}:${minuteString}`;
         labelsData.push(label);
         // Add the value to dataToShow
         dataToShow.push(dataPoint.value);
