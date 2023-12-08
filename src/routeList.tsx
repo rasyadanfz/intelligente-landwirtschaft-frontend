@@ -1,4 +1,5 @@
 import IndexPage from "./pages/IndexPage";
+import RequestSeed from "./pages/RequestSeed";
 import Field from "./pages/Field";
 
 export interface RoutesInterface {
@@ -14,7 +15,10 @@ const routeList: RoutesInterface[] = [
     {
         path: "/field",
         element: <Field />,
-    },
+    },{
+        path:"/request-seed",
+        element: <RequestSeed/>
+    }
 ];
 
 export default routeList;
