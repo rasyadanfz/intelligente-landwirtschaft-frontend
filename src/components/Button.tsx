@@ -14,7 +14,7 @@ const Button = ({
     className = "",
 }: ButtonProps) => {
     let buttonClassName =
-        "p-2.5 w-full h-full rounded-sm font-medium border border-black" +
+        "p-2.5 w-full h-full rounded-md font-medium border border-black" +
         className;
 
     switch (type) {
@@ -27,6 +27,9 @@ const Button = ({
         case "no-bg":
             buttonClassName += " text-black";
             break;
+        case "selected":
+            buttonClassName +=
+                " bg-yellow-500 text-white font-bold hover:bg-yellow-400";
     }
 
     return (
