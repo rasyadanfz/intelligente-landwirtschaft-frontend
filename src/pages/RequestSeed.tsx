@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import SeedCard from "../components/SeedCard";
 import { seedCardInterface } from "../components/SeedCard";
-const baseURL:string = 'http://localhost:8000'
+const baseURL:string = 'https://intelligente-landwirtschaft-be.up.railway.app'
 
 async function getListSeed(){
     try{
-        const res = await fetch(`${baseURL}/api/seeds`,{
+        const res = await fetch(`${baseURL}/api/seed`,{
             method:"GET"
         })
 
