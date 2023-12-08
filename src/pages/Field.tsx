@@ -37,7 +37,9 @@ const Field = () => {
         setSelectedFieldData(allFieldData[fieldNumber]);
         console.log(allFieldData[fieldNumber]);
         const res = await axios.get(
-            `http://localhost:8000/api/monitor/${allFieldData[fieldNumber].id}`
+            `${import.meta.env.VITE_BACKEND_URL}/api/monitor/${
+                allFieldData[fieldNumber].id
+            }`
         );
         const data = res.data.data;
         if (data.length === 0) {
@@ -59,11 +61,13 @@ const Field = () => {
     useEffect(() => {
         const fetchData = async () => {
             const fieldDataResponse = await axios.get(
-                `http://localhost:8000/api/field`
+                `${import.meta.env.VITE_BACKEND_URL}/api/field`
             );
 
             const fieldMonitorDataResponse = await axios.get(
-                `http://localhost:8000/api/monitor/${fieldDataResponse.data.data[0].id}`
+                `${import.meta.env.VITE_BACKEND_URL}/api/monitor/${
+                    fieldDataResponse.data.data[0].id
+                }`
             );
             setAllFieldData(fieldDataResponse.data.data);
             setFieldMonitorData(fieldMonitorDataResponse.data.data);
@@ -78,17 +82,17 @@ const Field = () => {
     }, []);
 
     return (
-        <div className="mx-4 my-2 h-full">
+        <div className="px-4 py-2 h-full">
             <h1 className="text-h2 font-bold">Field Monitor Dashboard</h1>
-            <div className="flex gap-x-10 items-center pr-5 py-5">
-                <div className="max-w-[20%]">
+            <div className="flex gap-x-10 pr-5 py-5 h-full items-start justify-start">
+                <div className="">
                     <FieldSelector
                         data={allFieldData}
                         onClick={handleSelectedFieldNumber}
                     />
                 </div>
-                <div className="flex flex-col justify-between">
-                    <div className="flex gap-x-6 max-w-full flex-wrap gap-y-3">
+                <div className="flex flex-col justify-between items-start w-full">
+                    <div className="flex flex-wrap gap-x-6 gap-y-3">
                         <ReportCard
                             type="temperature"
                             value={latestFieldMonitorData?.air_temperature}
@@ -120,7 +124,7 @@ const Field = () => {
                             isSelected={selectedChartType === "moisture"}
                         />
                     </div>
-                    <div>
+                    <div className="w-[99%]">
                         <FieldChart
                             type={selectedChartType}
                             allData={fieldMonitorData}

@@ -62,7 +62,7 @@ const ReportCard = ({
         onClick(type);
     };
 
-    const className = `flex flex-wrap grow justify-between gap-x-10 border border-black rounded-md p-2 hover:cursor-pointer ${
+    const className = `flex justify-between gap-x-2 border border-black rounded-md p-2 hover:cursor-pointer ${
         isSelected ? "bg-gray-200" : ""
     }`;
     return (

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import FieldButton from "./FieldButton";
+import FieldStatus from "./FieldStatus";
 
 export interface FieldData {
     name: string;
@@ -18,6 +19,10 @@ const FieldSelector = ({ data, onClick }: FieldSelectorProps) => {
     const [selectedField, setSelectedField] = useState(0);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [fieldData, setFieldData] = useState<FieldData[]>([]);
+    const handleClick = (fieldNumber: number) => {
+        onClick(fieldNumber);
+        setSelectedField(fieldNumber);
+    };
 
     useEffect(() => {
         setFieldData(data);
@@ -25,22 +30,19 @@ const FieldSelector = ({ data, onClick }: FieldSelectorProps) => {
 
     const fieldList = fieldData.map((field: FieldData, _idx: number) => {
         return (
-            <div key={_idx} className="min-w-[45px] min-h-[45px]">
-                <FieldButton
-                    fieldNumber={field.numberId}
-                    isPlanted={field.isPlanted}
-                    isSelected={field.numberId === selectedField}
-                    onButtonClick={() => {
-                        setSelectedField(field.numberId);
-                        onClick(field.numberId);
-                    }}
-                />
-            </div>
+            <FieldStatus
+                fieldName={field.name}
+                isPlanted={field.isPlanted}
+                fieldNumber={field.numberId}
+                onClick={handleClick}
+                isSelected={field.numberId === selectedField}
+                key={_idx}
+            />
         );
     });
 
     return (
-        <div className="flex flex-wrap shrink-0 gap-x-3 gap-y-3">
+        <div className="flex flex-col shrink-0 gap-x-3 gap-y-3">
             {fieldList}
         </div>
     );
