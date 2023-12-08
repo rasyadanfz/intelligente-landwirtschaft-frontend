@@ -16,9 +16,7 @@ export interface FieldMonitorDataInterface {
 }
 const Field = () => {
     const [selectedChartType, setSelectedChartType] = useState("temperature");
-    const [selectedFieldNumber, setSelectedFieldNumber] = useState(0);
     const [allFieldData, setAllFieldData] = useState<FieldData[]>([]);
-    const [selectedFieldData, setSelectedFieldData] = useState<FieldData>();
     const [fieldMonitorData, setFieldMonitorData] =
         useState<FieldMonitorDataInterface[]>();
     const [latestFieldMonitorData, setLatestFieldMonitorData] =
@@ -33,9 +31,6 @@ const Field = () => {
 
     const handleSelectedFieldNumber = async (fieldNumber: number) => {
         // If Selector is clicked, get the selected Field Data and monitor data
-        setSelectedFieldNumber(fieldNumber);
-        setSelectedFieldData(allFieldData[fieldNumber]);
-        console.log(allFieldData[fieldNumber]);
         const res = await axios.get(
             `${import.meta.env.VITE_BACKEND_URL}/api/monitor/${
                 allFieldData[fieldNumber].id
