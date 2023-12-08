@@ -25,7 +25,7 @@ ChartJS.register(
 );
 
 interface ChartProps {
-    data: { time: Date; value: number }[];
+    data: { value: number; timePosted: Date }[];
     title: string;
 }
 
@@ -75,23 +75,30 @@ const getChart = ({
 };
 
 const Chart = ({ data, title }: ChartProps) => {
-    let dataToShow: number[] = [];
-    let labelsData: string[] = [];
-    let pointColors: string[] = [];
+    const dataToShow: number[] = [];
+    const labelsData: string[] = [];
+    const pointColors: string[] = [];
     let datasets: LineDataset[] = [];
 
     // Assuming data is {datetime, value}[]
-    data.forEach((dataPoint: { time: Date; value: number }) => {
+    data.forEach((dataPoint: { value: number; timePosted: Date }) => {
         // Get the date and/or time of the data, add to labelsData
+        const dataTime = new Date(dataPoint.timePosted);
+        const label = `${dataTime.getDate()}/${
+            dataTime.getMonth() + 1
+        }/${dataTime.getFullYear()} ${dataTime.getHours()}:${dataTime.getMinutes()}`;
+        labelsData.push(label);
         // Add the value to dataToShow
+        dataToShow.push(dataPoint.value);
         // Add color to pointColors
+        pointColors.push("#1ce815");
     });
     datasets = getLineDatasets({
         label: title,
         data: dataToShow,
         pointBackgroundColor: pointColors,
-        fillColor: "#fff",
-        color: "#000",
+        fillColor: "rgba(28, 232, 21, 0.3)",
+        color: "#1ce815",
     });
 
     // Finally return the Line Chart

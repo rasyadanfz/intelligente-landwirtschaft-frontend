@@ -27,6 +27,9 @@ const Button = ({
         case "no-bg":
             buttonClassName += " text-black";
             break;
+        case "selected":
+            buttonClassName +=
+                " bg-yellow-500 text-white font-bold hover:bg-yellow-400";
     }
 
     return (
