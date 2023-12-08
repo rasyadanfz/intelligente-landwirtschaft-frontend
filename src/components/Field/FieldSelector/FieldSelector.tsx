@@ -41,7 +41,11 @@ const FieldSelector = () => {
         );
     });
 
-    return <div className="grid grid-cols-5 gap-x-3 gap-y-3">{fieldList}</div>;
+    return (
+        <div className="grid grid-cols-5 gap-x-3 gap-y-3 p-2 m-2">
+            {fieldList}
+        </div>
+    );
 };
 
 export default FieldSelector;

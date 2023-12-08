@@ -14,7 +14,7 @@ const Button = ({
     className = "",
 }: ButtonProps) => {
     let buttonClassName =
-        "p-2.5 w-full h-full rounded-sm font-medium border border-black" +
+        "p-2.5 w-full h-full rounded-md font-medium border border-black" +
         className;
 
     switch (type) {
