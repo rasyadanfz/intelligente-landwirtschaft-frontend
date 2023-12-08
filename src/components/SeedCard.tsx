@@ -1,3 +1,5 @@
+import Button from "./Button";
+
 export interface seedCardInterface {
     id:string;
     name:string;
@@ -31,8 +33,11 @@ export default function SeedCard({name,stock}:seedCardInterface){
                     </div>
                 </div>
             </div>
-            <div className="justify-self-end items-end">
+            <div className="justify-self-end items-end flex flex-row">
                 {/* Here is the button going to be */}
+                <Button className="mx-2 my-4" text='-' onClick={()=>{}}/>
+                <p className="my-7 mx-4">0</p>
+                <Button className="mx-2 my-4" text='+' onClick={()=>{}}/>
             </div>
         </div>
     </div>
