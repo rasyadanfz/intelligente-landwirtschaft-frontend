@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SeedCard from "../components/SeedCard";
+import SeedCard, { seedInterface } from "../components/SeedCard";
 
 async function getListSeed() {
     try {
@@ -23,7 +23,7 @@ async function getListSeed() {
 }
 
 const RequestSeed = () => {
-    const [listSeed, setListSeed] = useState([]);
+    const [listSeed, setListSeed] = useState<seedInterface[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
