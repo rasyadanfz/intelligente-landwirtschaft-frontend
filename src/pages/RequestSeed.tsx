@@ -31,8 +31,10 @@ const RequestSeed = () => {
             try{
                 const res = await getListSeed();
                 const result = res.data;
+                for(let i = 0;i < result.length;i++){
+                    result[i].countTake = 0;
+                }
                 setListSeed(result);
-                
             }catch(error){
                 console.log("Error fetching data : ",error)
             }
