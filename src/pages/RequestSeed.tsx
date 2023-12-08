@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-
+import SeedCard from "../components/SeedCard";
+import { seedCardInterface } from "../components/SeedCard";
 const baseURL:string = 'http://localhost:8000'
 
 async function getListSeed(){
@@ -13,7 +14,7 @@ async function getListSeed(){
         }
 
         const data = res.json();
-        return data || [];
+        return data
     }catch(error){
         console.error("Error fetching data: ", error);
         return [];
@@ -29,9 +30,9 @@ const RequestSeed = () => {
         const fetchData = async() =>{
             try{
                 const res = await getListSeed();
-                console.log("HERE IS THE RES")
-                console.log(res.data)
-                setListSeed(res.data);
+                const result = res.data;
+                setListSeed(result);
+                
             }catch(error){
                 console.log("Error fetching data : ",error)
             }
@@ -42,7 +43,24 @@ const RequestSeed = () => {
 
     return (
         <div>
-            <h1>ASD</h1>
+            {
+                listSeed.length === 0 ?
+                (<div className="text-center absolute top-[50%] left-[50%] translate-x-[-50%] items-center justify-center">
+                <p className="font-semibold text-h5 md:text-h4 font-raleway">
+                    There is no seed
+                </p>
+                </div>) :
+                (
+                    <div>
+                        {
+                           listSeed.map((item,index)=>(
+                                <SeedCard key={index} name={item.name} stock={item.stock} />
+                           ))
+                        }
+                    </div>
+                )
+
+            }
         </div>
     );
 };
