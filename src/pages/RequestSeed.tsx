@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import SeedCard from "../components/SeedCard";
-const baseURL: string = "https://intelligente-landwirtschaft-be.up.railway.app";
 
 async function getListSeed() {
     try {
-        const res = await fetch(`${baseURL}/api/seed`, {
-            method: "GET",
-        });
+        const res = await fetch(
+            `${import.meta.env.VITE_BACKEND_URL}/api/seed`,
+            {
+                method: "GET",
+            }
+        );
 
         if (!res.ok) {
             throw new Error(`Failed to fetch data : ${res.statusText}`);
