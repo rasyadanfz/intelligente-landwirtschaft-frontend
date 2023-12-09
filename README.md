@@ -15,6 +15,7 @@
 2. [Group's Members](#groups-members)
 3. [Tech Stack](#tech-stack)
 4. [How to Run](#how-to-run)
+5. [Deployment](#deployment)
 
 ## Description
 
@@ -83,6 +84,7 @@ VITE_SECRET_AUTH_KEY=<your_secret_token>
 4. Jalankan aplikasi menggunakan command berikut
 
 ```
+npm install
 npm run dev
 ```
 
