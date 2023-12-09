@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import SeedCard, { seedInterface } from "../components/SeedCard";
+import Navbar from "../components/Navbar";
 
 async function getListSeed() {
     try {
@@ -44,23 +45,29 @@ const RequestSeed = () => {
 
     return (
         <div>
-            {listSeed.length === 0 ? (
-                <div className="text-center absolute top-[50%] left-[50%] translate-x-[-50%] items-center justify-center">
-                    <p className="font-semibold text-h5 md:text-h4 font-raleway">
-                        There is no seed
-                    </p>
-                </div>
-            ) : (
-                <div>
-                    {listSeed.map((item, index) => (
-                        <SeedCard
-                            key={index}
-                            name={item.name}
-                            stock={item.stock}
-                        />
-                    ))}
-                </div>
-            )}
+            <Navbar />
+            <div className="mx-10">
+                {listSeed.length === 0 ? (
+                    <div className="text-center absolute top-[50%] left-[50%] translate-x-[-50%] items-center justify-center">
+                        <p className="font-semibold text-h5 md:text-h4 font-raleway">
+                            There is no seed
+                        </p>
+                    </div>
+                ) : (
+                    <div>
+                        {listSeed.map((item, index) => (
+                            <SeedCard
+                                key={index}
+                                name={
+                                    item.name.charAt(0).toUpperCase() +
+                                    item.name.slice(1)
+                                }
+                                stock={item.stock}
+                            />
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
