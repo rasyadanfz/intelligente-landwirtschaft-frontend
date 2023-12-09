@@ -131,6 +131,8 @@ export default function SeedCard({
 				.then(
 					axios.spread((data1, data2) => {
 						console.log("data1", data1, "data2", data2);
+
+						window.location.reload();
 						toast({
 							variant: "success",
 							description: "Bibit berhasil ditanam.",
