@@ -5,6 +5,7 @@ import FieldSelector, {
 } from "../components/Field/FieldSelector/FieldSelector";
 import ReportCard from "../components/Field/ReportCard";
 import FieldChart from "../components/Chart/FieldChart";
+import Navbar from "../components/Navbar";
 
 export interface FieldMonitorDataInterface {
     air_humidity: number;
@@ -77,53 +78,56 @@ const Field = () => {
     }, []);
 
     return (
-        <div className="px-4 py-2 h-full">
-            <h1 className="text-h2 font-bold">Field Monitor Dashboard</h1>
-            <div className="flex gap-x-10 pr-5 py-5 h-full items-start justify-start">
-                <div className="">
-                    <FieldSelector
-                        data={allFieldData}
-                        onClick={handleSelectedFieldNumber}
-                    />
-                </div>
-                <div className="flex flex-col justify-between items-start w-full">
-                    <div className="flex flex-wrap gap-x-6 gap-y-3">
-                        <ReportCard
-                            type="temperature"
-                            value={latestFieldMonitorData?.air_temperature}
-                            onClick={setSelectedChartType}
-                            isSelected={selectedChartType === "temperature"}
-                        />
-                        <ReportCard
-                            type="humidity"
-                            value={latestFieldMonitorData?.air_humidity}
-                            onClick={setSelectedChartType}
-                            isSelected={selectedChartType === "humidity"}
-                        />
-                        <ReportCard
-                            type="pressure"
-                            value={latestFieldMonitorData?.air_pressure}
-                            onClick={setSelectedChartType}
-                            isSelected={selectedChartType === "pressure"}
-                        />
-                        <ReportCard
-                            type="ph"
-                            value={latestFieldMonitorData?.pH}
-                            onClick={setSelectedChartType}
-                            isSelected={selectedChartType === "ph"}
-                        />
-                        <ReportCard
-                            type="moisture"
-                            value={latestFieldMonitorData?.soil_moisture}
-                            onClick={setSelectedChartType}
-                            isSelected={selectedChartType === "moisture"}
+        <div>
+            <Navbar />
+            <div className="px-4 py-2 h-full">
+                <h1 className="text-h2 font-bold">Field Monitor Dashboard</h1>
+                <div className="flex gap-x-10 pr-5 py-5 h-full items-start justify-start">
+                    <div className="">
+                        <FieldSelector
+                            data={allFieldData}
+                            onClick={handleSelectedFieldNumber}
                         />
                     </div>
-                    <div className="w-[99%]">
-                        <FieldChart
-                            type={selectedChartType}
-                            allData={fieldMonitorData}
-                        />
+                    <div className="flex flex-col justify-between items-start w-full">
+                        <div className="flex flex-wrap gap-x-6 gap-y-3">
+                            <ReportCard
+                                type="temperature"
+                                value={latestFieldMonitorData?.air_temperature}
+                                onClick={setSelectedChartType}
+                                isSelected={selectedChartType === "temperature"}
+                            />
+                            <ReportCard
+                                type="humidity"
+                                value={latestFieldMonitorData?.air_humidity}
+                                onClick={setSelectedChartType}
+                                isSelected={selectedChartType === "humidity"}
+                            />
+                            <ReportCard
+                                type="pressure"
+                                value={latestFieldMonitorData?.air_pressure}
+                                onClick={setSelectedChartType}
+                                isSelected={selectedChartType === "pressure"}
+                            />
+                            <ReportCard
+                                type="ph"
+                                value={latestFieldMonitorData?.pH}
+                                onClick={setSelectedChartType}
+                                isSelected={selectedChartType === "ph"}
+                            />
+                            <ReportCard
+                                type="moisture"
+                                value={latestFieldMonitorData?.soil_moisture}
+                                onClick={setSelectedChartType}
+                                isSelected={selectedChartType === "moisture"}
+                            />
+                        </div>
+                        <div className="w-[99%]">
+                            <FieldChart
+                                type={selectedChartType}
+                                allData={fieldMonitorData}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
