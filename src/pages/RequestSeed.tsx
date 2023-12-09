@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SeedCard, { seedInterface } from "../components/SeedCard";
 import Navbar from "../components/Navbar";
+import { FieldData } from "../components/Field/FieldSelector/FieldSelector";
 
 async function getListSeed() {
 	try {
@@ -23,11 +24,33 @@ async function getListSeed() {
 	}
 }
 
+async function getAvailableFields() {
+	try {
+		const res = await fetch(
+			`${import.meta.env.VITE_BACKEND_URL}/api/field`,
+			{
+				method: "GET",
+			}
+		);
+
+		if (!res.ok) {
+			throw new Error(`Failed to fetch data : ${res.statusText}`);
+		}
+
+		const data = res.json();
+		return data;
+	} catch (error) {
+		console.error("Error fetching data: ", error);
+		return [];
+	}
+}
+
 const RequestSeed = () => {
 	const [listSeed, setListSeed] = useState<seedInterface[]>([]);
+	const [availableFields, setAvailableFields] = useState<FieldData[]>([]);
 
 	useEffect(() => {
-		const fetchData = async () => {
+		const fetchSeedData = async () => {
 			try {
 				const res = await getListSeed();
 				const result = res.data;
@@ -40,7 +63,22 @@ const RequestSeed = () => {
 			}
 		};
 
-		fetchData();
+		const fetchFieldData = async () => {
+			try {
+				const res = await getAvailableFields();
+				const data: FieldData[] = res.data;
+				const filteredData = data.filter(
+					(field) => field.isPlanted === false
+				);
+
+				setAvailableFields(filteredData);
+			} catch (error) {
+				console.log("Error fetching data : ", error);
+			}
+		};
+
+		fetchFieldData();
+		fetchSeedData();
 	}, []);
 
 	return (
@@ -56,14 +94,16 @@ const RequestSeed = () => {
 						</div>
 					) : (
 						<div>
-							{listSeed.map((item, index) => (
+							{listSeed.map((item: seedInterface, index) => (
 								<SeedCard
+									id={item.id}
 									key={index}
 									name={
 										item.name.charAt(0).toUpperCase() +
 										item.name.slice(1)
 									}
 									stock={item.stock}
+									availableFields={availableFields}
 								/>
 							))}
 						</div>
