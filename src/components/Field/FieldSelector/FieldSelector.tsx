@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import FieldButton from "./FieldButton";
 import FieldStatus from "./FieldStatus";
 
 export interface FieldData {
@@ -17,7 +16,6 @@ interface FieldSelectorProps {
 
 const FieldSelector = ({ data, onClick }: FieldSelectorProps) => {
     const [selectedField, setSelectedField] = useState(0);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [fieldData, setFieldData] = useState<FieldData[]>([]);
     const handleClick = (fieldNumber: number) => {
         onClick(fieldNumber);

@@ -1,48 +1,48 @@
 import { useEffect, useState } from "react";
-import SeedCard from "../components/SeedCard";
-import { seedCardInterface } from "../components/SeedCard";
 import Button from "../components/Button";
-const baseURL:string = 'https://intelligente-landwirtschaft-be.up.railway.app'
+import SeedCard, { seedInterface } from "../components/SeedCard";
+import Navbar from "../components/Navbar";
 
-async function getListSeed(){
-    try{
-        const res = await fetch(`${baseURL}/api/seed`,{
-            method:"GET"
-        })
+async function getListSeed() {
+    try {
+        const res = await fetch(
+            `${import.meta.env.VITE_BACKEND_URL}/api/seed`,
+            {
+                method: "GET",
+            }
+        );
 
-        if(!res.ok){
-            throw new Error(`Failed to fetch data : ${res.statusText}`)
+        if (!res.ok) {
+            throw new Error(`Failed to fetch data : ${res.statusText}`);
         }
 
         const data = res.json();
-        return data
-    }catch(error){
+        return data;
+    } catch (error) {
         console.error("Error fetching data: ", error);
         return [];
     }
-
 }
 
 const RequestSeed = () => {
+    const [listSeed, setListSeed] = useState<seedInterface[]>([]);
 
-    const [listSeed, setListSeed] = useState([]);
-    
-    useEffect(()=>{
-        const fetchData = async() =>{
-            try{
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
                 const res = await getListSeed();
                 const result = res.data;
-                for(let i = 0;i < result.length;i++){
+                for (let i = 0; i < result.length; i++) {
                     result[i].countTake = 0;
                 }
                 setListSeed(result);
-            }catch(error){
-                console.log("Error fetching data : ",error)
+            } catch (error) {
+                console.log("Error fetching data : ", error);
             }
-        }
+        };
 
         fetchData();
-    },[])
+    }, []);
 
     return (
         <div className="flex flex-col">
@@ -56,11 +56,16 @@ const RequestSeed = () => {
                 </div>) :
                 (
                     <div>
-                        {
-                           listSeed.map((item,index)=>(
-                                <SeedCard key={index} name={item.name} stock={item.stock} />
-                           ))
-                        }
+                        {listSeed.map((item, index) => (
+                            <SeedCard
+                                key={index}
+                                name={
+                                    item.name.charAt(0).toUpperCase() +
+                                    item.name.slice(1)
+                                }
+                                stock={item.stock}
+                            />
+                        ))}
                     </div>
                 )
 
@@ -69,7 +74,6 @@ const RequestSeed = () => {
             <div className="grid place-items-center">
                 <Button className="border h-[50px] w-[200px] mb-[200px]" text="Confirm" onClick={()=>{}}/>
             </div>
-
         </div>
     );
 };
