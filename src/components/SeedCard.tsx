@@ -1,5 +1,7 @@
 import Button from "./Button";
 import DropDown from "./DropDown";
+import { useState } from "react";
+
 
 export interface seedInterface {
     id: string;
@@ -15,10 +17,36 @@ export interface seedInterface {
 export interface seedCardInterface {
     name: string;
     stock: number;
+    countTake?: number;
+    onChangeCount?: (count: number) => void;
 }
 
 
-export default function SeedCard({ name, stock }: seedCardInterface) {
+export default function SeedCard({
+  name,
+  stock,
+  countTake = 0,
+  onChangeCount,
+}: seedCardInterface) {
+  const [localCountTake, setLocalCountTake] = useState(countTake);
+
+  const handleIncreaseCount = () => {
+    if (localCountTake < stock) {
+      setLocalCountTake(localCountTake + 1);
+      if (onChangeCount) {
+        onChangeCount(localCountTake + 1);
+      }
+    }
+  };
+
+  const handleDecreaseCount = () => {
+    if (localCountTake > 0) {
+      setLocalCountTake(localCountTake - 1);
+      if (onChangeCount) {
+        onChangeCount(localCountTake - 1);
+      }
+    }
+  };
     return (
         <div id="SeedCard">
             <div className="border border-black rounded-md p-4 relative duration-100 bg-[#EDEDED] my-[20px]">
@@ -40,15 +68,15 @@ export default function SeedCard({ name, stock }: seedCardInterface) {
                     <div className="justify-self-end items-end flex flex-row gap-x-8">
                         {/* Here is the button going to be */}
                         <Button
-                            className="mx-2 my-4 px-4 py-2"
-                            text="-"
-                            onClick={() => {}}
+                          className="mx-2 my-4 px-4 py-2"
+                          text="-"
+                          onClick={handleDecreaseCount}
                         />
-                        <p className="my-7 mx-4 font-semibold">0</p>
+                        <p className="my-7 mx-4 font-semibold">{localCountTake}</p>
                         <Button
-                            className="mx-2 my-4 px-4 py-2"
-                            text="+"
-                            onClick={() => {}}
+                          className="mx-2 my-4 px-4 py-2"
+                          text="+"
+                          onClick={handleIncreaseCount}
                         />
                     </div>
                 </div>
