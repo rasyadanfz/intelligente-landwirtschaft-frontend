@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Button from "../components/Button";
 import SeedCard, { seedInterface } from "../components/SeedCard";
 import Navbar from "../components/Navbar";
 
@@ -69,13 +68,6 @@ const RequestSeed = () => {
 							))}
 						</div>
 					)}
-				</div>
-				<div className="grid place-items-center">
-					<Button
-						className="border h-[50px] w-[200px] mb-[200px]"
-						text="Confirm"
-						onClick={() => {}}
-					/>
 				</div>
 			</div>
 		</div>
