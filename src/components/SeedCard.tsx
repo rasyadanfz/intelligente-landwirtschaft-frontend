@@ -1,4 +1,5 @@
 import Button from "./Button";
+import DropDown from "./DropDown";
 
 export interface seedCardInterface {
     id:string;
@@ -15,7 +16,7 @@ export interface seedCardInterface {
 export default function SeedCard({name,stock}:seedCardInterface){
     return(
     <div id="SeedCard">
-    <div className="border mx-[600px] border-black rounded-md p-4 relative duration-100 bg-[#EDEDED] my-[20px]">
+    <div className="border mx-[300px] border-black rounded-md p-4 relative duration-100 bg-[#EDEDED] my-[20px]">
         <div className="flex flex-col md:flex-row justify-center items-between md:justify-between md:items-center gap-y-4">
             <div>
                 <h1 className="font-semibold text-h6 mb-2">
@@ -35,9 +36,10 @@ export default function SeedCard({name,stock}:seedCardInterface){
             </div>
             <div className="justify-self-end items-end flex flex-row">
                 {/* Here is the button going to be */}
-                <Button className="mx-2 my-4" text='-' onClick={()=>{}}/>
+                {/* <Button className="mx-2 my-4" text='-' onClick={()=>{}}/>
                 <p className="my-7 mx-4">0</p>
-                <Button className="mx-2 my-4" text='+' onClick={()=>{}}/>
+                <Button className="mx-2 my-4" text='+' onClick={()=>{}}/> */}
+                <DropDown/>
             </div>
         </div>
     </div>

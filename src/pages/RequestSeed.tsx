@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SeedCard from "../components/SeedCard";
 import { seedCardInterface } from "../components/SeedCard";
+import Button from "../components/Button";
 const baseURL:string = 'https://intelligente-landwirtschaft-be.up.railway.app'
 
 async function getListSeed(){
@@ -44,7 +45,8 @@ const RequestSeed = () => {
     },[])
 
     return (
-        <div>
+        <div className="flex flex-col">
+            <div >
             {
                 listSeed.length === 0 ?
                 (<div className="text-center absolute top-[50%] left-[50%] translate-x-[-50%] items-center justify-center">
@@ -63,6 +65,11 @@ const RequestSeed = () => {
                 )
 
             }
+            </div>
+            <div className="grid place-items-center">
+                <Button className="border h-[50px] w-[200px] mb-[200px]" text="Confirm" onClick={()=>{}}/>
+            </div>
+
         </div>
     );
 };
